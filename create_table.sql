@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS public.student_exam
 CREATE TABLE IF NOT EXISTS public.student_subject
 (
     student_sid integer NOT NULL,
-    subject_id integer DEFAULT 1,
+    subject_id serial,
     PRIMARY KEY (subject_id)
 );
 
