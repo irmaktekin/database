@@ -31,11 +31,15 @@ FROM student
 
 
 /*Insert 1000 of subject*/
-INSERT INTO subject(subject_id, name,tutor)
+INSERT INTO subject(subject_id, name)
 SELECT subject_id,
-(array['Math','Science','Physic','English'])[floor(random() * 3 + 1)],
-(array['Mr Sonmez','Mrs Filiz','Mr Nick','Mrs Ayse'])[floor(random() * 3 + 1)]
+(array['Math','Science','Physic','English'])[floor(random() * 3 + 1)]
 FROM generate_series(1,1000) subject_id;
+/*According to subject name insert tutor name*/
+update subject
+SET tutor= case
+when name= 'Math' then 'Mr Alex' when name='Science' then 'Mrs Jennifer'
+when name='Physic' then 'Mr Ilyas' when name= 'English' then 'Mr Kaan' end
 
 select * from subject
 
