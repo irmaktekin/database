@@ -1,4 +1,5 @@
 /*100K users for testing index*/
+/*
 INSERT INTO student(student_id,username,surname,birth_date,primary_skill,phone_number,subject_name)
 SELECT student_id,  /*(array['Irmak','Ebru','Kaan','Mehmet'])[floor(random() * 3 + 1)],*/
 md5(random()::text)::varchar(5),
@@ -6,8 +7,8 @@ md5(random()::text)::varchar(5),
 NOW() + (random() * (NOW()+'90 days' - NOW())) + '30 days',
 (array['Java','JavaScript','HTML','Python'])[floor(random() * 3 + 1)],
 md5(random()::text)::varchar(11),
-md5(random()::text)
-FROM generate_series(1,100000) student_id
+(array['Math','Biology','Turkish','English'])[floor(random() * 3 + 1)],
+FROM generate_series(1,100000) student_id*/
 
 select * from student
 where student_id=6
@@ -18,14 +19,25 @@ SELECT exam_id,
 (array['Midterm1','Midterm2','Final','Makeup'])[floor(random() * 3 + 1)]
 FROM generate_series(1,1000000) exam_id
 
-select * from exam
-
+select * from student_exam
+select * from student inner join  student_exam on student_id =student_sid where username='Mic'
 
 /*Insert data to student_exam, get the foreign key from students table*/
 INSERT INTO student_exam(student_sid,marks)
 SELECT student.student_id,
-random_between(4,10)
+random_between(1,3)
 FROM student 
+
+
+
+/*Insert 1000 of subject*/
+INSERT INTO subject(subject_id, name,tutor)
+SELECT subject_id,
+(array['Math','Science','Physic','English'])[floor(random() * 3 + 1)],
+(array['Mr Sonmez','Mrs Filiz','Mr Nick','Mrs Ayse'])[floor(random() * 3 + 1)]
+FROM generate_series(1,1000) subject_id;
+
+select * from subject
 
 /*Insert data to student_subject, get the foreign key from students table*//*serial primary need*/
 INSERT INTO student_subject(student_sid)
@@ -44,12 +56,7 @@ SET username ='Tayfun'
 where student_id=6
 
 
-/*Generating test data for subject column and inserting it*/
-INSERT INTO subject(subject_id, name,tutor)
-SELECT student_id,
-(array['Math','Science','Physic','English'])[floor(random() * 3 + 1)],
-(array['Mr Sonmez','Mrs Filiz','Mr Nick','Mrs Ayse'])[floor(random() * 3 + 1)]
-FROM generate_series(1,1000) student_id;
+
 
 /*Checking the subject table*/
 select * from subject

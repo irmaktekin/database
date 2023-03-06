@@ -20,7 +20,8 @@ begin
 	
 end;
 $$
-select average_mark('304ca')
+select average_mark('Claudette')
+
 
 select * from student
 
@@ -46,8 +47,10 @@ begin
 end;
 $$
 
-select average_mark_subject('9')
-
+select average_mark_subject('Sales')
+select avg(marks)
+	from student inner join  student_exam on student_id =student_sid
+	where subject_name ='Science'
 /*RED ZONE*/
 create  function red_zone()
     RETURNS TABLE (
@@ -76,5 +79,4 @@ $$
 
 select red_zone()
 
-
-SELECT marks,username FROM student inner join  student_exam on student_id =student_sid 
+select * from student

@@ -11,7 +11,7 @@ CREATE INDEX idx_student_name
 ON student(username);
 
 EXPLAIN ANALYZE select * from student 
-WHERE username='b17fd'
+WHERE username='58cdd'
 
 DROP INDEX idx_student_name
 /*checking index size*/
@@ -24,7 +24,7 @@ ON student using hash(username)
 -with hash index sequential scan performed as a path of execution and resulted in 11.767 ms.
 -with btree index index scan performed as a path of execution and resulted in 6.990 ms.
 */
-
+select * from student
 
 /*AFTER INSERTING DATA*/
 /*100K Users*/
@@ -42,7 +42,7 @@ FROM generate_series(1,100000) student_id
 
 /*1000 of subject*/
 INSERT INTO subject(subject_id, name,tutor)
-SELECT student_id,
+SELECT subject_id,
 (array['Math','Science','Physic','English'])[floor(random() * 3 + 1)],
 (array['Mr Sonmez','Mrs Filiz','Mr Nick','Mrs Ayse'])[floor(random() * 3 + 1)]
 FROM generate_series(1,1000) student_id;
@@ -101,4 +101,5 @@ ON student(surname)
 
 EXPLAIN ANALYZE select marks,surname FROM student inner join  student_exam on student_id =student_sid 
 WHERE surname LIKE 'Durm%'
+select pg_size_pretty(pg_relation_size('idx_surname_withmark'));
 

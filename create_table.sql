@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS public.student
     primary_skill text NOT NULL,
     created_at timestamp without time zone NOT NULL DEFAULT 'NOW()',
     updated_at timestamp without time zone NOT NULL DEFAULT 'NOW()',
-    phone_number character varying(11) NOT NULL,
-    subject_name "char" NOT NULL,
+    phone_number character varying(50) NOT NULL,
+    subject_name text NOT NULL,
     PRIMARY KEY (student_id),
 	/*check username if it has special characters @,#,$*/
 	CONSTRAINT CK_name CHECK(username !~ '^[@#$]')
