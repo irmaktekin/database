@@ -14,7 +14,7 @@ begin
  	
 
 	RETURN QUERY
-	select avg(marks)
+	select round(avg(marks)::numeric,2)
 	from student inner join  student_exam on student_id =student_sid
 	where username = x;
 	
@@ -40,7 +40,7 @@ begin
  	
 
 	RETURN QUERY
-	select avg(marks)
+	select round(avg(marks)::numeric,2)
 	from student inner join  student_exam on student_id =student_sid
 	where subject_name = x;
 	
